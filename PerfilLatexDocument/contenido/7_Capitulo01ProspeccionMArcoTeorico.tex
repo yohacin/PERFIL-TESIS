@@ -1,0 +1,52 @@
+\Capitulo{Proyección del marco teórico}
+
+Para ejecutar el primer objetivo específico de sistematización teórica se emplea el Método por índices. A partir de un índice global se organiza la base conceptual y los elementos más importantes del campo, desglosándolos hasta lo más específico. Como insumo principal de este índice se toma el estudio de mapeo sistemático (SMS) conducido previamente por el investigador (\cite{Alcides2026}), del cual se derivan las categorías, arquitecturas y autores de referencia que se presentan a continuación.
+
+\subsection{Estado del arte}
+
+El estado del arte relacionado con el objeto de estudio se remonta a 2020, año en que \textcite{Lewis2020rag} formalizaron el paradigma de Generación Aumentada por Recuperación (RAG), acoplando un modelo generador con un mecanismo de recuperación no paramétrico sobre índices densos de documentos; en el mismo año, \textcite{Karpukhin2020_DPR} y \textcite{Guu2020_REALM} consolidaron, respectivamente, la recuperación densa de pasajes (DPR) y la integración de la recuperación en el preentrenamiento del modelo (REALM), sentando las bases técnicas de lo que la literatura reconoce como la fase de RAG fundacional. A criterio del investigador, estos aportes iniciales resuelven el problema del acceso a conocimiento externo, pero dejan sin resolver la fiabilidad de lo recuperado: el modelo carece de un mecanismo propio para juzgar si la evidencia obtenida es suficiente o correcta.
+
+Entre 2022 y 2023 la investigación se desplaza hacia dotar a los agentes de razonamiento y autorreflexión. \textcite{Yao2022_ReAct} intercalan razonamiento verbal y acciones ejecutables (ReAct); \textcite{Shinn2023_Reflexion} proponen Reflexion, en el que el agente verbaliza retroalimentación sobre sus propios errores sin reentrenar parámetros; y \textcite{Madaan2024_SelfRefine} demuestran con Self-Refine que un modelo puede refinar iterativamente sus propias respuestas mediante autocrítica. A juicio del investigador, si bien estos trabajos demuestran que la autorreflexión mejora el razonamiento, su validación se concentra mayormente en tareas de razonamiento simbólico o de escritura, sin anclaje sistemático en fuentes recuperadas --- una limitación que la fase siguiente del campo aborda directamente.
+
+A partir de 2024 ambas líneas convergen. \textcite{Asai2024_Selfrag} integran nativamente RAG y autorreflexión en Self-RAG mediante tokens de reflexión aprendidos; \textcite{Yan2024_CRAG} incorporan un evaluador de la calidad de los documentos recuperados (CRAG); y \textcite{Su2024_DRAGIN} junto con \textcite{JimGutierrez2024_HippoRAG} refinan, respectivamente, la activación condicional de la recuperación y la memoria a largo plazo multi-salto. Marcos de agentes más amplios, como AutoGen (\cite{Wu2024_AutoGen}) y MetaGPT (\cite{Hong2023_MetaGPT}), extienden estos mecanismos hacia la colaboración multiagente. No obstante, según se estableció mediante el Estudio de Mapeo Sistemático conducido por el investigador sobre 40 estudios primarios publicados entre 2020 y 2025 (\cite{Alcides2026}), esta convergencia se valida casi exclusivamente sobre modelos de lenguaje de gran escala, y persisten vacíos de conocimiento concretos: adaptación de dominio y arranque en frío, latencia y costo computacional de los ciclos iterativos de recuperación-reflexión, autocorrección limitada cuando el modelo carece de anclaje externo verificable, y una ausencia casi total de validación sobre modelos de lenguaje pequeños desplegados bajo restricciones de privacidad e infraestructura propias de una organización pequeña o mediana. Es precisamente en este último vacío donde se posiciona la presente propuesta doctoral.
+
+\subsection{Referentes teóricos}
+
+Tres marcos teóricos orientan conceptualmente la propuesta. El primero es la distinción entre conocimiento paramétrico (incrustado en los pesos del modelo) y conocimiento no paramétrico (almacenado externamente y recuperable en tiempo de inferencia), propuesta por \textcite{Lewis2020rag}, que fundamenta la separación entre ``saber'' y ``razonar'' en los sistemas RAG. El segundo es la teoría del aprendizaje por refuerzo verbal de \textcite{Shinn2023_Reflexion}, según la cual un agente puede mejorar su desempeño interpretando el lenguaje natural de su propia retroalimentación como una señal de refuerzo, sin necesidad de actualizar los parámetros del modelo mediante descenso de gradiente. El tercero es la noción de calibración epistémica --- la capacidad de un modelo para reconocer los límites de su propio conocimiento antes de responder--- discutida por \textcite{Jiang2024_KnowsWhat} y operacionalizada en Self-RAG (\cite{Asai2024_Selfrag}) mediante tokens de reflexión que el propio modelo aprende a emitir. El investigador asume estos tres marcos como complementarios: el primero explica por qué RAG es necesario, el segundo cómo un modelo puede autocorregirse sin reentrenamiento, y el tercero cuándo debe hacerlo.
+
+\subsection{Referentes conceptuales}
+
+\begin{itemize}
+    \item \textbf{Generación Aumentada por Recuperación (RAG):} mecanismo que ancla las respuestas de un modelo de lenguaje en documentos relevantes recuperados de un repositorio externo en tiempo de inferencia, sin requerir reentrenamiento (\cite{Lewis2020rag}).
+    \item \textbf{Autorreflexión:} capacidad de un modelo de lenguaje para introspeccionar sobre su propio razonamiento, identificar inconsistencias y refinar iterativamente sus respuestas (\cite{Shinn2023_Reflexion}).
+    \item \textbf{Modelo de Lenguaje Pequeño (SLM):} modelo de lenguaje en el rango aproximado de 1 a 13 mil millones de parámetros, viable para su despliegue en infraestructura propia bajo restricciones de recursos.
+    \item \textbf{Modelo de Lenguaje Grande (LLM):} modelo de lenguaje de propósito general con capacidad paramétrica muy superior (decenas a cientos de miles de millones de parámetros), típicamente desplegado en la nube.
+    \item \textbf{Alucinación:} generación de una respuesta confiada pero no fundamentada en evidencia verificable.
+    \item \textbf{Fundamentación (\textit{grounding}):} grado en que una respuesta generada puede vincularse explícitamente a la evidencia recuperada que la sustenta.
+    \item \textbf{Conocimiento empresarial interno:} documentación operativa, procesos, decisiones técnicas y registros institucionales de una organización, no disponibles públicamente.
+    \item \textbf{Arquitectura de autorreflexión sobre RAG (Variable independiente):} conjunto de mecanismos mediante los cuales un agente evalúa la evidencia recuperada y desencadena ciclos correctivos antes de responder.
+    \item \textbf{Confiabilidad de las respuestas (Variable dependiente):} grado de fundamentación y ausencia de alucinación de las respuestas generadas sobre conocimiento empresarial interno.
+\end{itemize}
+
+\subsection{Modelos, métodos y enfoques técnicos}
+
+\begin{itemize}
+    \item \textbf{Arquitectura Transformer y mecanismos de atención}, base computacional común a los LLM y SLM empleados en RAG y autorreflexión.
+    \item \textbf{Recuperación densa mediante representaciones vectoriales (\textit{embeddings})} y búsqueda por similitud semántica, empleada para indexar y recuperar el conocimiento empresarial interno (\cite{Karpukhin2020_DPR}).
+    \item \textbf{Métodos de razonamiento en cadena (\textit{Chain-of-Thought}) y su extensión a estructuras de búsqueda}, como el Árbol de Pensamientos (\cite{Yao2023_ToT}), que permiten explorar múltiples trayectorias inferenciales.
+    \item \textbf{Aprendizaje por refuerzo verbal}, mediante el cual un agente ajusta su comportamiento a partir de retroalimentación en lenguaje natural sin actualizar parámetros (\cite{Shinn2023_Reflexion}).
+    \item \textbf{Aprendizaje en contexto (\textit{in-context learning}) y ajuste fino ligero}, como alternativas al reentrenamiento completo para adaptar un SLM a un dominio empresarial específico.
+\end{itemize}
+
+\subsection{Componentes y elementos tecnológicos}
+
+\begin{itemize}
+    \item \textbf{Familias de modelos de lenguaje pequeños de código abierto} (p.\ ej.\ LLaMA, Mistral, Phi, Gemma), en el rango de 1 a 13 mil millones de parámetros, candidatas para la implementación del prototipo.
+    \item \textbf{Almacenes e índices vectoriales} (p.\ ej.\ FAISS) para la indexación y recuperación eficiente del conocimiento empresarial interno.
+    \item \textbf{Marcos de referencia para la evaluación de sistemas intensivos en conocimiento}, como KILT (\cite{Petroni2021_KILT}) y AgentBench (\cite{Liu2024_AgentBench}), que orientan el diseño de las métricas del prototipo.
+    \item \textbf{Herramientas de inferencia local optimizadas para \textit{hardware} limitado} (cuantización de modelos, motores de inferencia eficiente), necesarias para el despliegue \textit{on-premise} en una PyME como Dualbiz SRL.
+    \item \textbf{Políticas internas de confidencialidad de la información} de Dualbiz SRL, como marco normativo de referencia para el tratamiento del conocimiento operativo utilizado en la validación empírica.
+\end{itemize}
+
+Este esbozo constituye el punto de partida conceptual de la propuesta y será desglosado, ampliado y profundizado, incorporando además otros referentes teóricos no cubiertos por el alcance del SMS en el marco teórico-referencial del Trabajo Final de Grado.
+

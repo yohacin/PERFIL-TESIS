@@ -1,0 +1,47 @@
+\section{Formulación de la construcción teórica}
+
+\subsection{Hipótesis de investigación}
+
+La implentación del Modelo crítico Critic-EmpRAG1.0, incorporando mecanismos de autorreflexión en dominio especifico sobre una arquitectura RAG con modelos de lenguaje pequeños, mejora la productividad y el acceso al Sistema de soporte de conocimiento empresarial interno de las áreas de TI y desarrollo en Dualbiz SRL.
+
+\subsection{Identificación de las variables de investigación}
+
+\textbf{Variable independiente}: Modelo crítico Critic-EmpRAG1.0.
+
+\textbf{Variable dependiente}:  Productividad y acceso al conocimiento.
+
+
+\section{Aporte de la investigación y novedad científica}
+
+\subsection*{Aporte teórico}
+
+El aporte teórico de la investigación lo constituye el Modelo crítico Critic-EmpRAG1.0, entendido no como una implementación de \textit{software} sino como una construcción teórica que establece los componentes, las relaciones entre ellos y las condiciones bajo las cuales la autorreflexión mejora la confiabilidad de las respuestas de un modelo de lenguaje pequeño sobre conocimiento empresarial interno.
+
+En lo esencial, el modelo extiende al componente crítico la distinción entre conocimiento paramétrico y no paramétrico formulada por \textcite{Lewis2020rag} para el componente generador. La literatura consultada resuelve la especificidad de dominio del crítico por vía paramétrica. Self-RAG (\cite{Asai2024_Selfrag}) entrena el crítico fuera de línea con anotaciones obtenidas de un modelo propietario, y Self-BioRAG (\cite{jeong_improving_2024}) alcanza especificidad biomédica reentrenando ese crítico con instrucciones del dominio, validándolo por concordancia con el propio modelo propietario que lo supervisó, es decir, dentro de la distribución de datos sobre la que fue entrenado. El modelo que se propone separa conceptualmente dos atributos que dichos trabajos mantienen fundidos en los pesos del crítico: \textbf{la competencia para juzgar}, de carácter genérico y paramétrico, heredada del modelo base; y el \textbf{conocimiento del dominio específico} (sobre el cual se juzga), de carácter no paramétrico y anclado en la evidencia recuperada en tiempo de inferencia. De esta separación se deriva la noción de crítico híbrido que articula la propuesta y que responde a la pregunta formulada en la justificación teórica: cómo dotar de contexto de dominio específico al componente crítico sin reentrenarlo sobre datos del dominio propietario.
+
+Derivado de lo anterior, el trabajo aporta la formulación explícita de las relaciones de compromiso entre confiabilidad del razonamiento, capacidad paramétrica y restricciones de recursos computacionales. Tales relaciones se enuncian hoy de forma dispersa en la literatura como la autorreflexión pierde efectividad cuando el modelo carece de anclaje externo verificable (\cite{Shinn2023_Reflexion}), la evaluación de la evidencia recuperada condiciona la calidad de la respuesta (\cite{Yan2024_CRAG}) y el modelo no siempre reconoce los límites de su propio conocimiento (\cite{Jiang2024_KnowsWhat}); pero no aparecen integradas en un cuerpo conceptual que permita decidir, bajo restricciones dadas de \textit{hardware} y privacidad, qué mecanismo de autorreflexión resulta admisible y con el dominio del contexto empresarial de la industria del software.
+
+Finalmente, la sistematización de la literatura prevista en el primer objetivo específico, sustentada en el Estudio de Mapeo Sistemático conducido como fase previa (\cite{Alcides2026}), aporta un ordenamiento de los métodos, técnicas y despliegues del objeto de estudio en la intersección entre RAG, autorreflexión y modelos de lenguaje pequeños, con sus categorías, arquitecturas de referencia y vacíos de conocimiento identificados.
+
+\subsection*{Aporte práctico}
+
+El aporte práctico se concreta en los productos tangibles que transforman la situación descrita en los antecedentes y que quedan disponibles para la organización y para investigaciones posteriores:
+
+\begin{itemize}
+	\item \textbf{El prototipo funcional} que implementa el Modelo crítico Critic-EmpRAG1.0 sobre modelos de lenguaje pequeños de código abierto, desplegado \textit{on-premise} en las áreas de TI y desarrollo de Dualbiz SRL., operando íntegramente dentro de las restricciones de privacidad de la información e infraestructura de cómputo de la empresa.
+	\item \textbf{El banco de evaluación de conocimiento empresarial interno}, conformado por consultas representativas del proceso de soporte, sus respuestas esperadas y la evidencia documental de referencia que las sustenta, construido conforme a las políticas internas de confidencialidad de Dualbiz SRL. y utilizable como instrumento de medición en los contextos $A_0$ y $A_1$.
+	\item \textbf{Los instrumentos de investigación} elaborados y validados en el estudio que comprenden: la guía de análisis documental, guía de entrevista, cuestionario de encuesta, guía de observación y cuestionario de consulta a expertos, aplicables al diagnóstico del acceso al conocimiento operativo en organizaciones de perfil semejante.
+	\item \textbf{El procedimiento replicable} de diseño y validación del componente crítico, que documenta las decisiones de diseño y su fundamento en la evidencia sistematizada, de modo que otras pequeñas y medianas empresas de desarrollo de \textit{software}, u otros dominios específicos con restricciones equivalentes, puedan reproducirlo sin repetir la fase exploratoria.
+	\item \textbf{La transformación medible del campo de acción}, expresada en la mejora de la productividad y el acceso al Sistema de soporte de conocimiento empresarial interno, verificada mediante los indicadores de exactitud, fundamentación y eficiencia computacional definidos en la operacionalización de las variables (Tabla \ref{tab:operacionalizacion}).
+\end{itemize}
+
+\subsection*{Novedad científica}
+
+La novedad científica de la investigación radica en dotar de especificidad de dominio al componente crítico de una arquitectura de autorreflexión sobre RAG en tiempo de inferencia y sin reentrenamiento sobre datos propietarios, mediante un crítico híbrido que ancla su juicio en la evidencia recuperada del corpus empresarial en lugar de hacerlo en parámetros ajustados con anotaciones de un modelo propietario.
+
+Esta formulación se distancia de las dos soluciones disponibles en la literatura precisamente en el punto que las hace inaplicables al contexto estudiado. Self-RAG (\cite{Asai2024_Selfrag}) opera sobre dominio general y deja abierta la adopción a dominios específicos; Self-BioRAG (\cite{jeong_improving_2024}) demuestra que esa adopción exige componentes específicos de dominio y la resuelve reentrenando el crítico con instrucciones anotadas mediante llamadas a un modelo propietario. Para una PyME tecnológica ambas salidas resultan incompatibles de manera simultánea: la primera, porque la generalización deficiente conduce a recuperar documentos incorrectos y a emitir juicios inexactos sobre el dominio; la segunda, porque exponer el conocimiento operativo confidencial a un servicio de terceros para su anotación vulnera las restricciones de privacidad, y el reentrenamiento del crítico excede la infraestructura de cómputo disponible. La propuesta sortea ambas barreras al trasladar la especificidad de dominio del plano paramétrico al no paramétrico.
+
+Según se evidencia en el Estudio de Mapeo Sistemático conducido por el investigador sobre 40 estudios primarios publicados entre 2020 y 2025 (\cite{Alcides2026}), no se identificaron estudios que satisfagan de forma concurrente las tres condiciones que definen este trabajo: la integración de autorreflexión y RAG sobre modelos de lenguaje pequeños en el rango de 1 a 13 mil millones de parámetros, su aplicación a un dominio empresarial privado real y su validación bajo restricciones efectivas de privacidad e infraestructura. En consecuencia, resulta igualmente novedosa la naturaleza de la validación empírica que se propone: a diferencia de los antecedentes, que se verifican sobre conjuntos públicos de referencia y dentro de la distribución de entrenamiento del crítico, el Modelo Critic-EmpRAG1.0 se contrasta sobre conocimiento empresarial interno no publicado, ajeno a la distribución de entrenamiento de los modelos empleados, en un escenario operativo real de la industria del \textit{software}.
+
+
+\newpage

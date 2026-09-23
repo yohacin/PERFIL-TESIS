@@ -1,0 +1,234 @@
+% APA 7: márgenes de 1 pulgada (2.54 cm) en los cuatro lados
+\usepackage[
+top=2.54cm,     % Margen superior
+bottom=2.54cm,  % Margen inferior
+left=2.54cm,    % Margen izquierdo
+right=2.54cm,   % Margen derecho
+% showframe      % Opcional: muestra un marco alrededor del área de texto y los márgenes para depuración
+]{geometry}
+
+%Automatic indexes in the table of contents
+\usepackage[nottoc,notlot]{tocbibind}
+%	\renewcommand{\tableofcontents}{\begingroup
+%		\tocsection
+%		\tocchapter
+%		\tocfile{\contentsname}{toc}
+%	\endgroup}
+%	\renewcommand{\listoffigures}{\begingroup
+%    	\tocsection
+%        \tocchapter
+%    	\tocfile{\listfigurename}{lof}
+% 	\endgroup}
+%	\renewcommand{\listoftables}{\begingroup
+%    	\tocsection
+%    	\tocfile{\listtablename}{lot}
+% 	\endgroup}
+
+\usepackage[utf8]{inputenc} % coding
+\usepackage{acronym}
+%Verwendete Schrift z.B. lmodern
+%\usepackage{lmodern}
+%\usepackage{libertine}
+%\usepackage{mathpazo,eulervm}
+%\usepackage{tgpagella,eulervm}
+%\usepackage[charter]{mathdesign}
+%\usepackage[osf,sc]{mathpazo}  % APA 7: desactivado (Palatino con cifras elzevirianas)
+%\usepackage[sc]{mathpazo}
+%\usepackage{
+%lmodern, 
+%hfoldsty 
+% charter
+%}
+
+
+%Language-related packages
+\usepackage[english, portuguese,spanish]{babel} % defining languages 
+\usepackage[babel]{csquotes} %English quotation marks
+%\usepackage[babel, german=guillemets]{csquotes}
+
+\usepackage[T1]{fontenc}
+%\usepackage{lmodern}  % APA 7: reemplazado por Times (newtx)
+% APA 7: tipografía Times New Roman 12 pt
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{eurosym}
+% The € sign can now really be displayed with €
+\DeclareUnicodeCharacter{20AC}{\euro}
+\DeclareUnicodeCharacter{200B}{}
+%The packages for the index
+\usepackage{makeidx}
+\makeindex
+
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning}
+
+
+
+%Various standard packages
+\usepackage[
+		pdftex,
+		pdfpagelabels=true,
+	 	citecolor=black,
+       	filecolor=blue,
+      	urlcolor=black,
+       	bookmarks=true,
+       	bookmarksopen=true,
+       	bookmarksopenlevel=3,
+       	plainpages=false,
+       	pdfpagelabels=true,
+       	pdfborder={0 0 0},
+       	breaklinks=true,]{hyperref}
+\hypersetup{colorlinks=true,
+			breaklinks=true,
+			urlcolor=black,
+			linkcolor=black,
+			menucolor=black,
+			% Diese Angaben kommen in die PDF Eigenschaften
+			pdftitle    = {Help-Seeking},
+			pdfsubject  = {Dissertation},
+			pdfauthor   = {Bastian Wimmer},
+			pdfkeywords = {Keyword 1,Keyword 2, Keyword 3},
+			pdfcreator  = {TeXStudio, MacTex \& Me},
+			pdfproducer = {LaTeX with Hyperref}}
+\usepackage[hypcap]{caption}
+
+
+
+%%Line spacing
+\usepackage{setspace}
+%\setstretch{1,2381}
+%\onehalfspacing
+% ── FORMATO APA 7 ────────────────────────────────────────────
+% Interlineado doble en todo el documento (texto, citas en bloque y referencias)
+\doublespacing
+
+% Sangría de primera línea de 0.5 pulgadas (1.27 cm) en todos los párrafos.
+% El paquete indentfirst (cargado más abajo) la aplica también al primer
+% párrafo que sigue a cada título, como exige APA.
+\setlength{\parindent}{1.27cm}
+% Espacio adicional entre párrafos para dar más aire a la lectura.
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+
+% Listas con el mismo interlineado doble del texto, sin espacio adicional
+% entre elementos ni antes o después de la lista.
+% (Se ajusta directamente porque enumitem es incompatible con paralist.)
+\makeatletter
+\def\@listi{\leftmargin\leftmargini
+	\topsep\z@ \partopsep\z@ \parsep\z@ \itemsep\z@}
+\let\@listI\@listi
+\def\@listii{\leftmargin\leftmarginii \labelwidth\leftmarginii
+	\advance\labelwidth-\labelsep
+	\topsep\z@ \partopsep\z@ \parsep\z@ \itemsep\z@}
+\makeatother
+
+% Número de página en el extremo superior derecho, sin línea de encabezado,
+% incluidas las páginas de inicio de capítulo (estilo plain).
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{%
+	\fancyhf{}%
+	\fancyhead[R]{\thepage}%
+	\renewcommand{\headrulewidth}{0pt}%
+}
+
+% Títulos de tablas y figuras según APA: el rótulo ("Tabla 1") en negrita,
+% en su propia línea, y el título en cursiva debajo, alineados a la izquierda.
+\captionsetup{labelfont=bf, textfont=it, labelsep=newline,
+	justification=raggedright, singlelinecheck=false}
+
+% ─────────────────────────────────────────────────────────────
+
+% Packages for graphics, tables, etc.
+\usepackage{verbatim} %for multiline comments
+%\usepackage[nonumberlist, acronym, toc, section]{glossaries}
+\usepackage{textcomp}
+\usepackage{graphicx} % support the \includegraphics command and options
+\usepackage{booktabs}
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{ifthen}
+\usepackage{float}
+   %\usepackage{csquotes}
+   
+\usepackage{tabularx}
+\usepackage{adjustbox} % Para controlar el ajuste de la tabla
+\usepackage{ragged2e} % Para justificar texto en columnas p{}
+
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}} 
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}m{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X} % Columna alineada izquierda
+\usepackage{paralist}
+\usepackage{siunitx}
+\sisetup{
+add-decimal-zero = false,
+add-integer-zero = false,
+}
+
+%Command for the lines on the title page
+\newcommand{\HRule}{\rule{\linewidth}{0.2mm}}
+%Indent paragraph
+%Sets the indentation depth of the first line after the heading
+\usepackage{indentfirst}
+
+% Improve horizontal lines in tables
+\newcommand{\forloop}[5][1]{%
+\setcounter{#2}{#3}%
+\ifthenelse{#4}{#5\addtocounter{#2}{#1}%
+\forloop[#1]{#2}{\value{#2}}{#4}{#5}}%
+{}}
+\newcounter{crcounter}
+\newcommand{\compensaterule}[1]{%
+\forloop{crcounter}{1}{\value{crcounter} < #1}%
+{\vspace*{-\aboverulesep}\vspace*{-\belowrulesep}}}
+\newcommand{\multirowbt}[3]{\multirow{#1}{#2}%
+{\compensaterule{#1}#3}}
+
+
+
+%Paquetes propios
+
+\addto\captionsspanish{
+	\renewcommand{\tablename}{Tabla}
+}
+
+
+\usepackage{titling}
+\usepackage{changepage} % Cargar el paquete changepage
+\usepackage{svg}
+
+
+%Captions left
+% (Desactivado: forzaba títulos en letra pequeña, contrario a APA 7; el formato
+% de títulos de tablas y figuras se define arriba con \captionsetup.)
+%\usepackage[font=footnotesize,labelfont=bf,singlelinecheck=false,format=plain,,justification=justified,indention=0cm]{caption}
+
+
+%Colores para las tablas
+% ── grayscale palette ────────────────────────────────────────
+\definecolor{bubInc}{gray}{0.88}   % light  — Include
+\definecolor{bubUnc}{gray}{0.58}   % mid    — Uncertain
+\definecolor{bubExc}{gray}{0.20}   % dark   — Exclude
+\definecolor{gridcol}{gray}{0.80}
+\definecolor{textcol}{gray}{0.12}
+\definecolor{subcol}{gray}{0.48}
+
+
+
+%Citation in APA style
+\usepackage[style=apa, backend=biber]{biblatex}  % Load biblatex with APA style
+\addbibresource{./_bibliografia.bib}  % Ensure this matches your .bib file name
+% APA 7: lista de referencias con sangría francesa (la aplica biblatex-apa) e
+% interlineado doble, sin espacio adicional entre entradas.
+\setlength{\bibitemsep}{0pt}
+

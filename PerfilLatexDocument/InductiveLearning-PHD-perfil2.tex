@@ -1,0 +1,112 @@
+\documentclass[12pt,a4paper]{article}
+%Integrating the necessary packages, here you should actually keep your hands off! However, the language is changed in this file at Babel
+
+
+\input{./paquetes/_paquetesSOE.tex}
+
+\usepackage{titlesec}
+% Jerarquía de títulos según APA 7, conservando la numeración exigida por la
+% normativa institucional: capítulos centrados y en negrita; \section y nivel 2
+% al margen izquierdo en negrita; nivel 3 al margen izquierdo en negrita cursiva.
+% Todos van en el mismo cuerpo que el texto y el párrafo siguiente lleva sangría.
+\titleformat{\section}{\normalfont\normalsize\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection.}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries\itshape}{\thesubsubsection.}{1em}{}
+
+% Media línea de espacio antes de cada título para separarlo del bloque
+% anterior; ninguna después, el interlineado doble ya lo separa del texto.
+\titlespacing*{\section}{0pt}{0.5\baselineskip}{0pt}
+\titlespacing*{\subsection}{0pt}{0.5\baselineskip}{0pt}
+\titlespacing*{\subsubsection}{0pt}{0.5\baselineskip}{0pt}
+
+%Start of the main document
+\begin{document}
+\pagenumbering{gobble} % No PAgecounting by default
+
+%Title page, adjust in the corresponding document
+\input{./_caratulaV2.tex}
+%\input{./contenido/0_Abstract.tex}
+\clearpage
+
+\selectlanguage{spanish}
+\pagenumbering{roman}
+
+% Los índices conservan su espaciado original, sin el espacio entre párrafos.
+{\setlength{\parskip}{0pt}
+\tableofcontents
+\clearpage
+\renewcommand{\listtablename}{Índice de tablas}
+\listoftables
+\clearpage}
+
+%Back to Arabic page numbering
+%Reset the page counter to 1 for the main part
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+% --- Chapter numbering (Capítulo N) -----------------------------------
+% \Capitulo{Título} prints the centered "Capítulo N. Título" heading,
+% adds it to the TOC, and rebinds \thesubsection to N.M so that every
+% \subsection / \subsubsection inside the chapter numbers and TOC-lists
+% itself automatically (no manual "2.3." typing, no \addcontentsline).
+\newcounter{capitulo}
+\newcommand{\Capitulo}[1]{%
+	\stepcounter{capitulo}%
+	% Avanza el contador de sección para que los destinos internos del PDF sean
+	% únicos en cada capítulo; no altera la numeración visible, que se toma del
+	% contador capitulo.
+	\refstepcounter{section}%
+	\setcounter{subsection}{0}%
+	\renewcommand{\thesubsection}{\arabic{capitulo}.\arabic{subsection}}%
+	\clearpage
+	\begin{center}
+		{\normalsize\bfseries Capítulo \arabic{capitulo}.\\ #1}
+	\end{center}
+	\addcontentsline{toc}{section}{Capítulo \arabic{capitulo}. #1}%
+}
+
+
+\selectlanguage{spanish}
+
+ 
+%Include the chapters of the work with Include, adjust directories correctly please
+\input{./contenido/0_Introduccion.tex}
+\input{./contenido/1_Antecedentes.tex}
+\input{./contenido/2_Problema.tex}
+\input{./contenido/3_Objetivos.tex}
+\input{./contenido/4_Justificacion+Alcance.tex}
+\input{./contenido/6_FormulacionConstruccionTeor.tex}
+\input{./contenido/7_Capitulo01ProspeccionMArcoTeorico.tex}
+\input{./contenido/08_Capitulo02_ProyecMetodolo.tex}
+
+%Page break for the following bibliography
+%\clearpage
+%%Bibliography, please enter correct bibliography file name
+
+
+
+%\appendix
+%\input{./contenido/appendixA}
+%\include{./subdocs/appendixB}
+\addcontentsline{toc}{section}{References}
+
+\clearpage
+\printbibliography  % Print the bibliography (only entries actually \cite'd/\textcite'd in the document)
+
+%Index if required. Don't forget to run the <Index command>, otherwise comment out the following lines with % until end
+% Index should mean index
+%\renewcommand{\indexname}{Stichwortverzeichnis} 
+%Be careful with English document language
+
+% Index should appear in the table of contents
+%\addcontentsline{toc}{section}{Index}
+
+\newpage
+% Index issue
+
+
+%\printindex
+\end{document}

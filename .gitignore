@@ -1,0 +1,22 @@
+# Artefactos de compilación LaTeX — se regeneran con latexmk
+build/
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.idx
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.fls
+*.fdb_latexmk
+
+# Bloqueos de LibreOffice
+.~lock.*#
+
+# Copias manuales de respaldo — las reemplaza el historial de git
+PerfilLatexDocument_*/
