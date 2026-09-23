@@ -20,20 +20,27 @@
    1.2.3. Fuente de verificación de la crítica (evidencia externa recuperada vs.\ conocimiento paramétrico) \\
 \hline
 2. VD. Productividad y acceso al conocimiento
- & 2.1. Precisión y exactitud
- & 2.1.1. Exactitud de respuesta (\textit{accuracy}/F1 frente a respuesta esperada) \newline
-   2.1.2. Tasa de alucinación (proporción de afirmaciones no verificables) \\
+ & 2.1. Fundamentación y confiabilidad
+ & 2.1.1. Exactitud de respuesta (\textit{accuracy}/F1 frente a la respuesta esperada) \newline
+   2.1.2. Tasa de alucinación (afirmaciones no sustentadas por la evidencia recuperada, sobre el total de afirmaciones verificables) \newline
+   2.1.3. Proporción de afirmaciones con fuente o cita verificable \newline
+   2.1.4. Puntaje de fidelidad (\textit{faithfulness}) respecto a los documentos recuperados \newline
+   2.1.5. Tasa de abstención correcta ante consultas sin respaldo en el corpus \\
 \cline{2-3}
- & 2.2. Fundamentación (\textit{grounding})
- & 2.2.1. Proporción de afirmaciones con fuente o cita verificable \newline
-   2.2.2. Puntaje de fidelidad (\textit{faithfulness}) respecto a los documentos recuperados \\
+ & 2.2. Productividad del proceso de consulta
+ & 2.2.1. Tiempo medio de resolución por consulta operativa \newline
+   2.2.2. Tasa de consultas resueltas sin escalamiento a personal experimentado \newline
+   2.2.3. Interrupciones semanales a personal experimentado por consultas de conocimiento \newline
+   2.2.4. Esfuerzo percibido en la consulta (escala Likert de 1 a 5) \\
 \cline{2-3}
- & 2.3. Eficiencia computacional
+ & 2.3. Viabilidad bajo restricciones
  & 2.3.1. Latencia promedio de respuesta \newline
-   2.3.2. Consumo de recursos de cómputo (memoria/GPU) \\
+   2.3.2. Consumo de recursos de cómputo (memoria/GPU) \newline
+   2.3.3. Proporción de consultas resueltas sin transmisión de datos a servicios de terceros \newline
+   2.3.4. Superficies de exposición con control implementado, sobre el total identificado \\
 \hline
 \end{tabularx}
 
 \vspace{0.2cm}
-\noindent{\small \textit{Nota.} La identificación de las dimensiones e indicadores es perfectible bajo este estudio.}
+\noindent{\small \textit{Nota.} Los indicadores de la dimensión 2.2 se registran en los contextos $A_0$ y $A_1$ con el mismo instrumento, conforme al diseño preexperimental; los de las dimensiones 2.1 y 2.3 se obtienen sobre el banco de evaluación en las configuraciones de la Tabla \ref{tab:configuraciones}.}
 \end{table}
