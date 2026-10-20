@@ -2,7 +2,23 @@
 
 \subsection{Hipótesis de investigación}
 
-La implentación del Modelo crítico Critic-EmpRAG1.0, incorporando mecanismos de autorreflexión en dominio específico sobre una arquitectura RAG con modelos de lenguaje pequeños, mejora la productividad y el acceso al Sistema de soporte de conocimiento empresarial interno de las áreas de TI y desarrollo en Dualbiz SRL.
+Dado el alcance explicativo del estudio y la manipulación deliberada de la variable independiente, las hipótesis son de tipo causal. Se formulan dos, una por cada variable dependiente y por cada nivel de la validación empírica, de modo que cada una pueda aceptarse o rechazarse con independencia de la otra.
+
+\textbf{Hipótesis 1 (nivel organizacional).}
+
+\begin{itemize}
+	\item \textbf{H$_{i1}$:} La implementación del Modelo crítico Critic-EmpRAG1.0 sobre una arquitectura RAG con modelos de lenguaje pequeños aumenta la productividad del proceso de consulta al Sistema de soporte de conocimiento empresarial interno de las áreas de TI y desarrollo en Dualbiz SRL, al reducir el tiempo de resolución de las consultas, la dependencia del personal experimentado y el esfuerzo percibido.
+	\item \textbf{H$_{o1}$:} La implementación del Modelo crítico Critic-EmpRAG1.0 no produce diferencias significativas en la productividad del proceso de consulta entre el contexto inicial $A_0$ y el contexto final $A_1$.
+	\item \textbf{H$_{a1}$:} La productividad del proceso de consulta varía entre $A_0$ y $A_1$, pero la variación responde a factores ajenos al modelo, como la familiarización del personal con las consultas o la disponibilidad de un canal automatizado cualquiera.
+\end{itemize}
+
+\textbf{Hipótesis 2 (nivel computacional).}
+
+\begin{itemize}
+	\item \textbf{H$_{i2}$:} Al anclar el juicio del componente crítico en la evidencia recuperada en tiempo de inferencia, y no en parámetros ajustados con datos del dominio, el Modelo crítico Critic-EmpRAG1.0 ($C_4$) mejora el acceso al conocimiento ---mayor fundamentación y confiabilidad de las respuestas, dentro de las restricciones de privacidad de la información e infraestructura de cómputo--- respecto de la misma arquitectura con un crítico paramétrico ($C_3$).
+	\item \textbf{H$_{o2}$:} No existen diferencias significativas en los indicadores de acceso al conocimiento entre $C_4$ y $C_3$.
+	\item \textbf{H$_{a2}$:} $C_4$ supera a $C_3$, pero la mejora no procede del anclaje del crítico en la evidencia recuperada, sino de la formulación de sus instrucciones o de los ciclos adicionales de inferencia; se verifica si la ablación $C_{4b}$, que priva al crítico de la evidencia recuperada, conserva el desempeño de $C_4$.
+\end{itemize}
 
 \subsection{Identificación de las variables de investigación}
 
