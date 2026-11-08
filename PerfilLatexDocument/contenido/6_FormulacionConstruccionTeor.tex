@@ -7,67 +7,26 @@ Dado el alcance explicativo del estudio y la manipulación deliberada de la vari
 \textbf{Hipótesis 1 (nivel organizacional).}
 
 \begin{itemize}
-	\item \textbf{H$_{i1}$:} La implementación del Modelo crítico Critic-EmpRAG1.0 sobre una arquitectura RAG con modelos de lenguaje pequeños aumenta la productividad del proceso de consulta al Sistema de soporte de conocimiento empresarial interno de las áreas de TI y desarrollo en Dualbiz SRL, al reducir el tiempo de resolución de las consultas, la dependencia del personal experimentado y el esfuerzo percibido.
-	\item \textbf{H$_{o1}$:} La implementación del Modelo crítico Critic-EmpRAG1.0 no produce diferencias significativas en la productividad del proceso de consulta entre el contexto inicial $A_0$ y el contexto final $A_1$.
-	\item \textbf{H$_{a1}$:} La productividad del proceso de consulta varía entre $A_0$ y $A_1$, pero la variación responde a factores ajenos al modelo, como la familiarización del personal con las consultas o la disponibilidad de un canal automatizado cualquiera.
+	\item \textbf{H$_{i1}$:} La implementación del Modelo crítico híbrido, Critic-EmpRAG1.0, sobre una arquitectura RAG con modelos de lenguaje pequeños aumenta la productividad del proceso de consulta al Sistema de soporte de conocimiento empresarial interno de las áreas de TI y desarrollo en Dualbiz SRL, al reducir el tiempo de resolución de las consultas, la dependencia del personal experimentado y el esfuerzo percibido.
+	
 \end{itemize}
 
 \textbf{Hipótesis 2 (nivel computacional).}
 
 \begin{itemize}
-	\item \textbf{H$_{i2}$:} Al anclar el juicio del componente crítico en la evidencia recuperada en tiempo de inferencia, y no en parámetros ajustados con datos del dominio, el Modelo crítico Critic-EmpRAG1.0 ($C_4$) mejora el acceso al conocimiento ---mayor fundamentación y confiabilidad de las respuestas, dentro de las restricciones de privacidad de la información e infraestructura de cómputo--- respecto de la misma arquitectura con un crítico paramétrico ($C_3$).
-	\item \textbf{H$_{o2}$:} No existen diferencias significativas en los indicadores de acceso al conocimiento entre $C_4$ y $C_3$.
-	\item \textbf{H$_{a2}$:} $C_4$ supera a $C_3$, pero la mejora no procede del anclaje del crítico en la evidencia recuperada, sino de la formulación de sus instrucciones o de los ciclos adicionales de inferencia; se verifica si la ablación $C_{4b}$, que priva al crítico de la evidencia recuperada, conserva el desempeño de $C_4$.
+	\item \textbf{H$_{i2}$:} Al anclar el juicio del componente crítico en la evidencia recuperada en tiempo de inferencia, y no en parámetros ajustados con datos del dominio, el Modelo crítico híbrido, Critic-EmpRAG1.0 ($C_4$), mejora el acceso al conocimiento ---mayor fundamentación y confiabilidad de las respuestas, dentro de las restricciones de privacidad de la información e infraestructura de cómputo--- respecto de la misma arquitectura con un crítico paramétrico ($C_3$).
+	
 \end{itemize}
 
 \subsection{Identificación de las variables de investigación}
 
-\textbf{Variable independiente}: Modelo crítico Critic-EmpRAG1.0.
+\textbf{Variable independiente}: Modelo crítico híbrido Critic-EmpRAG1.0.
 
 \textbf{Variable dependiente 1}: Productividad del proceso de consulta.
 
 \textbf{Variable dependiente 2}: Acceso al conocimiento.
 
 
-\section{Aporte de la investigación y novedad científica}
-
-\subsection*{Aporte teórico}
-
-En lo esencial, el modelo crítico Critic-EmpRAG1.0, que se propone extiende al componente crítico la distinción entre conocimiento paramétrico y no paramétrico formulada por \textcite{Lewis2020rag} para el componente generador. Separa conceptualmente dos atributos: \textbf{la competencia para juzgar}, de carácter genérico y paramétrico, heredada del modelo base; y el \textbf{conocimiento del dominio específico} (sobre el cual se juzga), de carácter no paramétrico y anclado en la evidencia recuperada en tiempo de inferencia. De esta separación se deriva la noción de crítico híbrido que articula la propuesta y que responde a cómo dotar de contexto de dominio específico al componente crítico sin reentrenarlo sobre datos del dominio propietario.
-
-De esta separación se deriva un cuerpo de proposiciones que explican por qué y bajo qué condiciones el crítico híbrido mejora el juicio en dominio específico. Cada proposición se enuncia con su condición de aplicabilidad y con la observación que la refutaría dentro del diseño de validación (Tabla \ref{tab:configuraciones}).
-
-\begin{itemize}
-	\item \textbf{P1. Principio de separabilidad.} La competencia para juzgar y el conocimiento del dominio son atributos separables del componente crítico: el primero puede heredarse del modelo base sin ajuste, y el segundo puede suministrarse como evidencia en tiempo de inferencia. Se refuta si el crítico privado de la evidencia recuperada ($C_{4b}$) alcanza el desempeño del sistema completo ($C_4$), pues el conocimiento del dominio no estaría operando a través de la evidencia.
-	\item \textbf{P2. Principio de sustitución.} Bajo restricciones que impiden el reentrenamiento, el anclaje del juicio en la evidencia recuperada sustituye al ajuste paramétrico como fuente de especificidad de dominio: un crítico híbrido alcanza en fundamentación y confiabilidad un desempeño igual o superior al de un crítico paramétrico de dominio general aplicado al mismo dominio. Se refuta si $C_3$ supera a $C_4$ en los indicadores de fundamentación y confiabilidad.
-	\item \textbf{P3. Condición de cobertura.} El efecto enunciado en P2 está condicionado a que la evidencia recuperada contenga respaldo para la consulta. Cuando no lo contiene, el crítico híbrido carece de base para juzgar sobre el dominio y su comportamiento correcto es la abstención; por tanto, su ventaja debe manifestarse también como una mayor tasa de abstención correcta ante consultas sin respaldo. Se refuta si, en esas consultas, $C_4$ no se abstiene con mayor acierto que $C_2$ y $C_3$.
-	\item \textbf{P4. Condición de capacidad.} La separabilidad enunciada en P1 exige una capacidad paramétrica mínima del modelo base: por debajo de ella, el crítico no puede evaluar la correspondencia entre la evidencia y la respuesta aunque disponga de la evidencia correcta. Esta condición se enuncia como línea de exploración de la tesis, ya que su contraste exige evaluar $C_3$ y $C_4$ con al menos dos modelos base de distinto tamaño dentro del rango de 1 a 13 mil millones de parámetros y queda sujeto a la infraestructura de cómputo disponible; si la ventaja de $C_4$ no varía con la capacidad del modelo, la condición se descarta.
-\end{itemize}
-
-En conjunto, las proposiciones establecen la relación causal que la hipótesis 2 somete a prueba: la disponibilidad de evidencia con respaldo (P3), procesada por un modelo base con capacidad suficiente (P4), permite que el crítico juzgue sobre el dominio sin conocerlo paramétricamente (P1), y ello produce respuestas más fundamentadas que las de un crítico ajustado por vía paramétrica (P2). El cuerpo integra así relaciones que hoy se enuncian de forma dispersa en la literatura ---que la autorreflexión pierde efectividad cuando el modelo carece de anclaje externo verificable (\cite{Shinn2023_Reflexion}), que la evaluación de la evidencia recuperada condiciona la calidad de la respuesta (\cite{Yan2024_CRAG}) y que el modelo no siempre reconoce los límites de su propio conocimiento (\cite{Jiang2024_KnowsWhat})--- y permite decidir, bajo restricciones dadas de \textit{hardware} y privacidad, qué mecanismo de autorreflexión resulta admisible en el dominio empresarial de la industria del \textit{software}.
-
-Finalmente, la sistematización de la literatura, sustentada en el estudio de mapeo sistemático conducido como fase previa (\cite{Alcides2026}), aporta un ordenamiento de los métodos, técnicas y despliegues del objeto de estudio en la intersección entre RAG, autorreflexión y modelos de lenguaje pequeños, con sus categorías, arquitecturas de referencia y vacíos de conocimiento identificados.
-
-\subsection*{Aporte práctico}
-
-El aporte práctico es el modelo crítico,  Critic-EmpRAG1.0 que se propone. Se concreta en los productos tangibles que transforman la situación descrita en los antecedentes y que quedan disponibles para la organización y para investigaciones posteriores:
-
-\begin{itemize}
-	\item \textbf{El prototipo funcional} que implementa el Modelo crítico Critic-EmpRAG1.0 sobre modelos de lenguaje pequeños de código abierto, desplegado \textit{on-premise} en las áreas de TI y desarrollo de Dualbiz SRL., operando íntegramente dentro de las restricciones de privacidad de la información e infraestructura de cómputo de la empresa.
-	\item \textbf{El banco de evaluación de conocimiento empresarial interno}, conformado por consultas representativas del proceso de soporte, sus respuestas esperadas y la evidencia documental de referencia que las sustenta, construido conforme a las políticas internas de confidencialidad de Dualbiz SRL.
-	\item \textbf{El procedimiento replicable} de diseño y validación del componente crítico, que documenta las decisiones de diseño y su fundamento en la evidencia sistematizada, de modo que otras pequeñas y medianas empresas de desarrollo de \textit{software}, u otros dominios específicos con restricciones equivalentes, puedan reproducirlo sin repetir la fase exploratoria.
-	\item \textbf{La transformación medible del campo de acción}, expresada en la mejora de la productividad y el acceso al Sistema de soporte de conocimiento empresarial interno, verificada mediante los indicadores de exactitud, fundamentación y eficiencia computacional.
-\end{itemize}
-
-\subsection*{Novedad científica}
-
-La novedad científica de la investigación radica en dotar de especificidad de dominio al componente crítico de una arquitectura de autorreflexión sobre RAG en tiempo de inferencia y sin reentrenamiento sobre datos propietarios, mediante un crítico híbrido que ancla su juicio en la evidencia recuperada del corpus empresarial en lugar de hacerlo en parámetros ajustados con anotaciones de un modelo propietario. Esta formulación se distancia de las dos soluciones disponibles en la literatura precisamente en el punto que las hace inaplicables al contexto estudiado. Self-RAG (\cite{Asai2024_Selfrag}) opera sobre dominio general y deja abierta la adopción a dominios específicos; Self-BioRAG (\cite{jeong_improving_2024}) demuestra que esa adopción exige componentes específicos de dominio y la resuelve reentrenando el crítico con instrucciones anotadas mediante llamadas a un modelo propietario. 
-
-Para una PyME tecnológica, ambas salidas resultan incompatibles de manera simultánea: la primera, porque la generalización deficiente conduce a recuperar documentos incorrectos y a emitir juicios inexactos sobre el dominio. La segunda, porque exponer el conocimiento operativo confidencial a un servicio de terceros, para su anotación, vulnera las restricciones de privacidad, y el reentrenamiento del crítico excede la infraestructura de cómputo disponible. La propuesta sortea ambas barreras al trasladar la especificidad de dominio del plano paramétrico al no paramétrico.
-
-Según se evidencia en el SMS conducido por el investigador sobre 40 estudios primarios publicados entre 2020 y 2025 (\cite{Alcides2026}), no se identificaron estudios que satisfagan de forma concurrente las tres condiciones que definen este trabajo: la integración de autorreflexión y RAG sobre modelos de lenguaje pequeños en el rango de 1 a 13 mil millones de parámetros, su aplicación a un dominio empresarial privado real y su validación bajo restricciones efectivas de privacidad e infraestructura.
-
-En consecuencia, resulta igualmente novedosa la naturaleza de la validación empírica que se propone: a diferencia de los antecedentes, que se verifican sobre conjuntos públicos de referencia y dentro de la distribución de entrenamiento del crítico, el Modelo Critic-EmpRAG1.0 se contrasta sobre conocimiento empresarial interno no publicado, ajeno a la distribución de entrenamiento de los modelos empleados, en un escenario operativo real de la industria del \textit{software}.
 
 
 \newpage
